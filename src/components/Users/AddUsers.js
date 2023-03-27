@@ -8,9 +8,11 @@ const AddUsers=props=>{
 
 const nameInputRef=useRef();
 const ageInputRef=useRef();
+const collagenameInputRef = useRef();
+
 
     const[enteredUserName,setEnterdUsername]=useState('');
-    const[enteredAge,setEnterdAge]=useState('');
+    const[enteredUserAge,setEnterdAge]=useState('');
     const[error,setError]=useState();
 
     const addUserHandler=(event)=>{
@@ -31,10 +33,16 @@ const ageInputRef=useRef();
            })
            return;
         }
+
         console.log(enteredUserName,enteredAge)
         setEnterdUsername('');
         setEnterdAge('');
     }
+    props.onAddUser(enteredUserName, enteredUserAge, enteredCollageName);
+      nameInputRef.current.value = "";
+      ageInputRef.current.value = "";
+      collagenameInputRef.current.value = "";
+    };
 
     const usernameChangeHandler=(event)=>{
         setEnterdUsername(event.target.value);
@@ -63,6 +71,9 @@ const ageInputRef=useRef();
 
         <label htmlFor="age" >Age</label>
         <input id="age" type="number" value={enteredAge}onChange={ageChangeHandler}></input>
+
+        <label htmlFor="collage-name">Collage Name</label>
+          <input id="collage-name" type="text" ref={collagenameInputRef} />
         
        <Button type="submit">Add User</Button>
        </form>
