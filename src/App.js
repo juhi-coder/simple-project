@@ -1,27 +1,42 @@
-import React,{useState} from 'react';
-import Login from './components/Login';
-
-import './App.css';
+import React ,{useState} from "react";
 const App=()=>{
-        const [userList, setUserList]=useState([]);
-        const addNewUserHandler=(uName,uAge,uCollage)=>{
-                setUserList((prevUserList)=>{
-                        return[...prevUserList,{name:uName,age:uAge,collage:uCollage}]
-                })
-        }
 
+const[name,setName]=useState("");
+const[username,setUserName]=useState();
+const[password,setPassword]=useState();
 
-
-
-        return(
-           <div>
-            <Form onAddUser={addNewUserHandler}/>
-            <UserList users={userList} />
-
-            <Login  />
-           </div> 
-
-        );
+const InputEvent=(event)=>{
+    console.log(event.target.value);
+    setName(event.target.value);
+    
 }
 
+const InputEventTwo=(event)=>{
+    console.log(event.target.value);
+    setPassword(event.target.value);
+}
+
+const onSubmits=(event)=>{
+    event.preventDefault();
+    setName(username);
+    setName(password);
+}
+
+    return(
+            <div>
+            <form onSubmit={onSubmits}>
+                <input type="text" placeholder="Enter Username"
+                onChange={InputEvent}
+                value={name}></input>
+                <br></br>
+
+                <input type="text" placeholder="Enter password"
+                onChange={InputEventTwo}
+                value={password}></input>
+                <br></br>
+                 <button type="submit">Submit</button>
+                 </form>
+            </div>
+    )
+}
 export default App;
