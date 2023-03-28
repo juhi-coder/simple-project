@@ -1,12 +1,5 @@
-import React ,{
-    useState,
-  useEffect,
-  useReducer,
-  useContext,
-  useRef,
-} from "react";
-
- const Login=()=>{
+import React ,{useState,useEffect,useReducer,useContext,useRef} from "react";
+import AuthContext from './AuthContext'; 
 
     const emailReducer = (state, action) => {
         if (action.type === 'USER_INPUT') {
@@ -107,7 +100,7 @@ import React ,{
         onBlur={validateEmailHandler}
         ></input>
 
-<Input
+<input
           ref={passwordInputRef}
           id="password"
           label="Password"

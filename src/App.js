@@ -1,42 +1,28 @@
-import React ,{useState} from "react";
+import React ,{useState} from 'react';
+import Login from './component/Login';
+import AuthContext from './component/AuthContext';
+import Home from './component/Home';
 const App=()=>{
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const loginHandler = () => {
+        setIsLoggedIn(true);
+      };
 
-const[name,setName]=useState("");
-const[username,setUserName]=useState();
-const[password,setPassword]=useState();
+      const logoutHandler = () => {
+        setIsLoggedIn(false);
+      };
 
-const InputEvent=(event)=>{
-    console.log(event.target.value);
-    setName(event.target.value);
-    
-}
+      return (
+        <AuthContext.Provider
+          value={{ isLoggedIn: isLoggedIn, onLogout: logoutHandler }}
+        >
+         <main>
+            {!isLoggedIn && <Login onLogin={loginHandler} />}
+            {isLoggedIn && <Home onLogout={logoutHandler} />}
+            </main>
+        </AuthContext.Provider>
+      )
 
-const InputEventTwo=(event)=>{
-    console.log(event.target.value);
-    setPassword(event.target.value);
-}
 
-const onSubmits=(event)=>{
-    event.preventDefault();
-    setName(username);
-    setName(password);
-}
-
-    return(
-            <div>
-            <form onSubmit={onSubmits}>
-                <input type="text" placeholder="Enter Username"
-                onChange={InputEvent}
-                value={name}></input>
-                <br></br>
-
-                <input type="text" placeholder="Enter password"
-                onChange={InputEventTwo}
-                value={password}></input>
-                <br></br>
-                 <button type="submit">Submit</button>
-                 </form>
-            </div>
-    )
 }
 export default App;
